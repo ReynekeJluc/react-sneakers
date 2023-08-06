@@ -28,7 +28,6 @@ header {
 	justify-content: space-between;
 	border-bottom: 1px solid #EAEAEA;
 	padding: 40px 40px 45px 40px;
-	border-bottom: 1px solid #EAEAEA;
 	div {
 		margin-left: 15px;
 		h3 {
@@ -59,9 +58,10 @@ header {
 		align-items: center;
 		opacity: 70%;
 		transition: opacity 0.2s ease-in-out;
-		a {
+		a, button {
 			display: flex;
 			align-items: center;
+			background: none;
 		}
 		&:hover {
 			opacity: 100%;
@@ -74,16 +74,26 @@ header {
 }
 
 .overlay {
-	position: absolute;
+	position: fixed;
 	top: 0;
 	left: 0;
 	width: 100%;
 	height: 100%;
 	background-color: rgba($color: #000, $alpha: 0.5);
-	z-index: 1;
+	z-index: 2;
+}
+
+.block__cancel {
+	width: calc(100% - 400px);
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 100;
 }
 
 .drawer {
+	z-index: 1;
 	display: flex;
 	flex-direction: column;
 	position: absolute;
@@ -93,6 +103,24 @@ header {
 	background-color: #fff;
 	min-width: 400px;
 	height: 100%;
+
+	.drawer__title {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-bottom: 30px;
+
+		button {
+			background: none;
+			&:hover {
+				cursor: pointer;
+			}
+		}
+	}
+
+	h2 {
+		font-size: 24px;
+	}
 
 	.total-block {
 		margin-top: 20px;
@@ -107,7 +135,6 @@ header {
 			display: flex;
 			justify-content: space-between;
 			margin-bottom: 10px;
-			
 			div {
 				flex: 1;
 				height: 1px;
@@ -148,11 +175,6 @@ header {
 			transition: transform 0.2s ease-in-out;
 		}
 	}
-
-	h2 {
-		font-size: 24px;
-		margin-bottom: 30px;
-	}
 }
 
 .drawer-items {
@@ -190,23 +212,47 @@ header {
 
 .content {
 	padding: 40px 60px;
-	h1 {
-		margin-bottom: 40px;
+}
+
+.content__title {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 40px;
+}
+
+.search__block {
+	border: 1px solid #b8b8b8;
+	padding: 0px 10px;
+	border-radius: 10px;
+	display: flex; 
+	align-items: center;
+	input {
+		padding: 10px;
+		&::placeholder {
+			color: #b8b8b8;
+			font-size: 14px;
+		}
+		&::-ms-clear {
+			width : 0;
+			height: 0;
+		}
 	}
 }
 
 .cards {
-	display: grid;
-	grid-template-columns: 25% 25% 25% 25%;
-	gap: 40px;
+	display: flex;
+	gap: 30px;
+	flex-wrap: wrap;
 	max-width: 960px;
 }
 
 .card {
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	min-width: 210px;
+	max-width: 210px;
 	padding: 20px 30px 35px 30px;
 	border-radius: 40px;
 	border: 1px solid #F3F3F3;
@@ -228,18 +274,32 @@ header {
 			opacity: 50%;
 		}
 	}
-	button {
+	.add_btn {
 		box-sizing: border-box;
 		width: 32px;
 		height: 32px;
 		border-radius: 8px;
 		border: 1px solid #f2f2f2;
-		opacity: 70%;
+		opacity: 90%;
 		transition: opacity 0.2s ease-in-out;
 
 		&:hover {
 			cursor: pointer;
 			opacity: 100%;
 		}
+	}
+}
+
+.favor_btn {
+	position: absolute;
+	top: 27px;
+	left: 27px;
+	background: none;
+	opacity: 70%;
+	transition: opacity 0.2s ease-in-out;
+
+	&:hover {
+		opacity: 100%;
+		cursor: pointer;
 	}
 }

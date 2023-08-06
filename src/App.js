@@ -1,125 +1,55 @@
+import React from 'react';
+import axios from 'axios';
 import Header from './components/Header';
+import Drawer from './components/Drawer';
 import Card from './components/Card';
 
 function App() {
+
+	const [cards, setCards] = React.useState([]);
+	const [searchValue, setSearchValue] = React.useState('');
+	const [drawerOpened, setdrawerOpened] = React.useState(false);
+
+	const onChangeSearch = (event) => {
+		setSearchValue(event.target.value);
+	}
+
+	React.useEffect(() => {
+		axios.get('https://64c5c9dac853c26efadaf012.mockapi.io/sneakers'
+		).then((response) => {
+			let data = response.data;
+			setCards(data);
+		}).catch((error) => {
+			console.log(error.message);
+		})
+	}, []);
+
 	return (
 		<div className="wrapper">
-
-			<div style={{ display: 'none' }} class="overlay">
-				<div class="drawer">
-					<h2>Корзина</h2>
-					<div class="drawer-items">
-						<div class="cart-item">
-							<img width={70} height={70} src="/img/sneakers/1.png" alt="your sneakers" />
-							<div>
-								<span>Мужские Кроссовки Nike Air Max 270</span>
-								<b>12999 руб.</b>
-							</div>
-							<img className="btn-remove" src="/img/icons/remove.svg" alt="remove" />
-						</div>
-						<div class="cart-item">
-							<img width={70} height={70} src="/img/sneakers/2.png" alt="your sneakers" />
-							<div>
-								<span>Мужские Кроссовки Nike Air Max 270</span>
-								<b>12999 руб.</b>
-							</div>
-							<img className="btn-remove" src="/img/icons/remove.svg" alt="remove" />
-						</div>
-						<div class="cart-item">
-							<img width={70} height={70} src="/img/sneakers/3.png" alt="your sneakers" />
-							<div>
-								<span>Мужские Кроссовки Nike Air Max 270</span>
-								<b>12999 руб.</b>
-							</div>
-							<img className="btn-remove" src="/img/icons/remove.svg" alt="remove" />
-						</div>
-						<div class="cart-item">
-							<img width={70} height={70} src="/img/sneakers/3.png" alt="your sneakers" />
-							<div>
-								<span>Мужские Кроссовки Nike Air Max 270</span>
-								<b>12999 руб.</b>
-							</div>
-							<img className="btn-remove" src="/img/icons/remove.svg" alt="remove" />
-						</div>
-						<div class="cart-item">
-							<img width={70} height={70} src="/img/sneakers/3.png" alt="your sneakers" />
-							<div>
-								<span>Мужские Кроссовки Nike Air Max 270</span>
-								<b>12999 руб.</b>
-							</div>
-							<img className="btn-remove" src="/img/icons/remove.svg" alt="remove" />
-						</div>
-						<div class="cart-item">
-							<img width={70} height={70} src="/img/sneakers/3.png" alt="your sneakers" />
-							<div>
-								<span>Мужские Кроссовки Nike Air Max 270</span>
-								<b>12999 руб.</b>
-							</div>
-							<img className="btn-remove" src="/img/icons/remove.svg" alt="remove" />
-						</div>
-						<div class="cart-item">
-							<img width={70} height={70} src="/img/sneakers/3.png" alt="your sneakers" />
-							<div>
-								<span>Мужские Кроссовки Nike Air Max 270</span>
-								<b>12999 руб.</b>
-							</div>
-							<img className="btn-remove" src="/img/icons/remove.svg" alt="remove" />
-						</div>
-					</div>
-					<div className="total-block">
-						<ul class="drawer-order">
-							<li>
-								<span>Итого:</span>
-								<div></div>
-								<b>21498 руб.</b>
-							</li>
-							<li>
-								<span>Налог 5%</span>
-								<div></div>
-								<b>1074 руб.</b>
-							</li>
-						</ul>
-						<a href="#" className="green-btn">Оформить заказ<img src="/img/icons/arrow.svg" alt="arrow" /></a>
-					</div>
-				</div>
-			</div>
-
-			<Header />
-
+			<Header OnClickDrawer = { () => setdrawerOpened(true) } />
+			{drawerOpened ? <Drawer OnCloseDrawer = { () => setdrawerOpened(false) } /> : null}
 			<div className="content">
-				<h1>Все Кроссовки</h1>
-				<div className="cards">
-					<div className="card">
-						<img width={133} height={112} src="/img/sneakers/1.png" alt="sneakers" />
-						<div>
-							<p>Мужские Кроссовки Nike Blazer Mid Suede</p>
-							<div className="card-price">
-								<div>
-									<span>Цена: </span>
-									<b>12999 руб.</b>
-								</div>
-								<button>
-									<img src="/img/plus.png" alt="add" />
-								</button>
-							</div>
-						</div>
+				<div className="content__title">
+					<h1>{searchValue ? `Поиск по запросу "${searchValue}"` : "Все кроссовки"}</h1>
+					<div className="search__block">
+						<img src="/img/icons/search.svg" alt="search"/>
+						<input onChange={onChangeSearch} value={searchValue} type="search" placeholder="Поиск..."></input>	
 					</div>
-					<Card />
-					<Card />
-					<Card />
-					<Card />
-					<Card />
-					<Card />
-					<Card />
-					<Card />
-					<Card />
-					<Card />
-					<Card />
+				</div>
+				<div className="cards">
+					{cards.filter(item => String(item.name).includes(String(searchValue))).map((obj, index) => (
+						<Card
+							key = { index }
+							name = { obj.name }
+							price = { obj.price }
+							imageUrl = { obj.imageUrl }
+						/>
+					))}
 				</div>
 			</div>
-
 		</div>
 	);
+	
 }
 
 export default App;
