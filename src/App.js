@@ -21,18 +21,18 @@ function App() {
 							</div>
 						</div>
 						<ul className="list__sneakers">
-							<Card></Card>
-							<Card></Card>
-							<Card></Card>
-							<Card></Card>
-							<Card></Card>
-							<Card></Card>
-							<Card></Card>
-							<Card></Card>
-							<Card></Card>
-							<Card></Card>
-							<Card></Card>
-							<Card></Card>
+							<Card image_url="" title="" price=""></Card>
+							<Card image_url="" title="" price=""></Card>
+							<Card image_url="" title="" price=""></Card>
+							<Card image_url="" title="" price=""></Card>
+							<Card image_url="" title="" price=""></Card>
+							<Card image_url="" title="" price=""></Card>
+							<Card image_url="" title="" price=""></Card>
+							<Card image_url="" title="" price=""></Card>
+							<Card image_url="" title="" price=""></Card>
+							<Card image_url="" title="" price=""></Card>
+							<Card image_url="" title="" price=""></Card>
+							<Card image_url="" title="" price=""></Card>
 						</ul>
 					</div>
 				</div>
