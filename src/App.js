@@ -1,3 +1,5 @@
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import "./index.scss";
 
 import Header from './components/Header/index.js';
@@ -5,6 +7,16 @@ import Slider from './components/Slider/index.js';
 import Card from './components/Card/index.js';
 
 function App() {
+	const [ cards_list, setCards_list ] = React.useState([]);
+
+	useEffect(() => {
+		axios.get("http://localhost:3001/cards_info").then((data) => {
+			setCards_list(data.data);
+		}).catch((error) => {
+			console.log(error.message);
+		})
+	}, [cards_list]);
+
 	return (
 		<div className="App">
 			<div className="wrapper">
@@ -21,18 +33,11 @@ function App() {
 							</div>
 						</div>
 						<ul className="list__sneakers">
-							<Card image_url="" title="" price=""></Card>
-							<Card image_url="" title="" price=""></Card>
-							<Card image_url="" title="" price=""></Card>
-							<Card image_url="" title="" price=""></Card>
-							<Card image_url="" title="" price=""></Card>
-							<Card image_url="" title="" price=""></Card>
-							<Card image_url="" title="" price=""></Card>
-							<Card image_url="" title="" price=""></Card>
-							<Card image_url="" title="" price=""></Card>
-							<Card image_url="" title="" price=""></Card>
-							<Card image_url="" title="" price=""></Card>
-							<Card image_url="" title="" price=""></Card>
+							{
+								cards_list.map((obj) => (
+									<Card image_url={ obj.imageUrl } title={ obj.name } price={ obj.price }></Card>
+								)) 
+							}
 						</ul>
 					</div>
 				</div>
