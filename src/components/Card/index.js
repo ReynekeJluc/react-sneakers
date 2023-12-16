@@ -22,7 +22,11 @@ function Card(props) {
 				alt="favor_icon" 
 			/>
 			<a href="?">
-				<img src={ props.image_url } className={ styles.sneakers__image } alt="image sneakers" />
+				<img 
+					src={ props.image_url } 
+					className={ styles.sneakers__image } 
+					alt="img sneakers" 
+				/>
 			</a>
 			<div className={ styles.sneakers__title }>
 				<a href="?" >{ props.title }</a>

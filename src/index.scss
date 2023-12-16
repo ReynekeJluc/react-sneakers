@@ -76,6 +76,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 //
 
+// Delete default cross in input
+input[type="search" i]::-webkit-search-cancel-button,
+input[type="search" i]:enabled:read-write:-webkit-any(:focus, :hover)::-webkit-search-cancel-button  {
+	display: none;
+}
+//
+
 body {
 	background: var(--color_bg);
 	font-family: 'Inter', sans-serif;
@@ -111,10 +118,17 @@ body {
 				min-width: 250px;
 				max-height: 45px;
 				padding-left: 25px;
+
 				&:hover {
 					cursor: pointer;
 				}
-				img {
+				.clear__btn {
+					position: absolute;
+					top: 17px;
+					right: 15px;
+					cursor: pointer;
+				}
+				.search__btn {
 					position: absolute;
 					top: 14px;
 					left: 15px;
@@ -137,4 +151,3 @@ body {
 		grid-gap: 40px;
 	}
 }
-

@@ -20,6 +20,7 @@ header {
 		}
 	}
 	.header__links {
+		cursor: pointer;
 		color: var(--color_links);
 		display: flex;
 		justify-content: space-between;
