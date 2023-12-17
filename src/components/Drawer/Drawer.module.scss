@@ -1,0 +1,77 @@
+.drawer_wrapper {
+	position: relative;
+	display: flex;
+	.drawer_bg {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: calc((100vw / 3) * 2);
+		height: 100vh;
+		background: #000;
+		opacity: 50%;
+		z-index: 10000;
+	}
+	.drawer__block {
+		padding: 30px;
+		position: absolute;
+		top: 0;
+		right: 0;
+		background: #fff;
+		height: 100vh;
+		width: calc(100vw / 3);
+		z-index: 10000;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+
+		h4 {
+			font-weight: 600;
+			font-size: 24px;
+		}
+		.drawer__info {
+
+			.drawer__prices {
+				margin-bottom: 25px;
+				.total {
+					align-items: end;
+					font-size: 16px;
+					li {
+						display: flex;
+						justify-content: space-between;
+						align-items: end;
+						margin-top: 15px;
+					}
+					div {
+						flex: 1;
+						border-bottom: 1px dashed #DFDFDF;
+						margin: 0 10px;
+					}
+				}
+			}
+			.order__block {
+				position: relative;
+				.button__order {
+					position: relative;
+					background: #9DD458;
+					width: calc((100vw / 3) - 60px);
+					height: 55px;
+					border-radius: 20px;
+					p {
+						color: #fff;
+						position: absolute;
+						top: 50%;
+						left: 50%;
+						margin-right: -50%;
+						transform: translate(-50%, -50%);
+					}
+				}
+				svg {
+					position: absolute;
+					top: 20px;
+					right: 30px;
+					z-index: 1000;
+				}
+			}
+		}
+	}
+}
