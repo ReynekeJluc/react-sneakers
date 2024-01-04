@@ -11,7 +11,7 @@ function App() {
 	const source = "http://localhost:3001/cards_info";
 	const [ cards_list, setCards_list ] = React.useState([]);
 	const [ search_input, setSearch_input ] = React.useState('');
-	const [ isDrawer, setIsDrawer ] = React.useState(true);
+	const [ isDrawer, setIsDrawer ] = React.useState(false);
 
 	useEffect(() => {
 		axios.get(source).then((data) => {
@@ -26,7 +26,7 @@ function App() {
 
 	return (
 		<div className="App">
-			{ isDrawer ? <Drawer /> : undefined }
+			{ isDrawer ? <Drawer DrawerOpen={() => { setIsDrawer(false) }} /> : undefined }
 			<div className="wrapper">
 				<Header DrawerOpen={() => { setIsDrawer(true) }} />
 				<hr />
@@ -48,7 +48,7 @@ function App() {
 						</div>
 						<ul className="list__sneakers">
 							{
-								cards_list.map((obj, key) => (
+								cards_list.filter((item) => item.name.toLowerCase().includes(search_input.toLowerCase())).map((obj, key) => (
 									<Card 
 										image_url={ obj.imageUrl } 
 										title={ obj.name } 
