@@ -1,44 +1,79 @@
 import styles from './Drawer.module.scss';
 
-function Drawer(props) {
+function Drawer({ DrawerOpen, items = [], OnRemove }) {
 	return (
 		<div className={styles.drawer_wrapper}>
-			<div onClick={props.DrawerOpen} className={styles.drawer_bg}></div>
+			<div onClick={DrawerOpen} className={styles.drawer_bg}></div>
 			<div className={styles.drawer__block}>
 				<h4>Корзина</h4>
-				<div className={styles.drawer__items}>
-					<div className={styles.drawer__item}>
-						<div className={styles.card__img}>
-							<img
-								width={120}
-								height={120}
-								src='/img/sneakers/1.png'
-								alt='sneakers'
-							/>
-						</div>
-						<div className={styles.card__info}>
-							<p>Мужские Кроссовки Nike Air Max 270</p>
-							<b>12 999 руб.</b>
-						</div>
-						<img
-							style={{ cursor: 'pointer' }}
-							src='/img/icons/cancel.png'
-							alt='delete'
-						/>
+				{items.length !== 0 ? (
+					<div className={styles.drawer__items}>
+						{items.map(obj => (
+							<div className={styles.drawer__item}>
+								<div className={styles.card__img}>
+									<img
+										width={120}
+										height={120}
+										src={obj.image_url}
+										alt='sneakers'
+									/>
+								</div>
+								<div className={styles.card__info}>
+									<p>{obj.title}</p>
+									<b>
+										{new Intl.NumberFormat('ru-RU', {
+											style: 'currency',
+											currency: 'RUB',
+										}).format(obj.price)}
+									</b>
+								</div>
+								<img
+									onClick={() => OnRemove(obj.id)}
+									style={{ cursor: 'pointer' }}
+									src='/img/icons/cancel.png'
+									alt='delete'
+								/>
+							</div>
+						))}
 					</div>
-				</div>
+				) : (
+					<div className={styles.drawer__items}>
+						<div className={styles.drawer_empty}>
+							<img src='/img/empty_drawer.png' alt='empty'></img>
+							<h4>Корзина пуста</h4>
+							<p>
+								Корзина пуста, добавьте хотя бы одну пару кроссовок, чтобы
+								сделать заказ
+							</p>
+							<div onClick={DrawerOpen} className={styles.button__back}>
+								<img src='/img/icons/arrow_left.png' alt='arrow_left' />
+								Вернуться назад
+							</div>
+						</div>
+					</div>
+				)}
 				<div className={styles.drawer__info}>
 					<div className={styles.drawer__prices}>
 						<ul className={styles.total}>
 							<li>
 								<span>Итого:</span>
 								<div></div>
-								<b>21 498 руб.</b>
+								<b>
+									{new Intl.NumberFormat('ru-RU', {
+										style: 'currency',
+										currency: 'RUB',
+									}).format(12000)}
+								</b>
 							</li>
 							<li>
 								<span>Налог 5%:</span>
 								<div></div>
-								<b>1074 руб.</b>
+								<b>
+									{new Intl.NumberFormat('ru-RU', {
+										style: 'currency',
+										currency: 'RUB',
+									}).format(12000)}
+								</b>
 							</li>
 						</ul>
 					</div>

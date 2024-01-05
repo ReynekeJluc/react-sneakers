@@ -13,7 +13,7 @@ function Header(props) {
 				</div>
 			</a>
 			<div className={styles.header__links}>
-				<div className={styles.header__link}>
+				<div onClick={props.DrawerOpen} className={styles.header__link}>
 					<svg
 						width='20'
 						height='20'
@@ -43,7 +43,13 @@ function Header(props) {
 							strokeLinejoin='round'
 						/>
 					</svg>
-					<h3 onClick={props.DrawerOpen}>1205руб.</h3>
+					<h3>
+						{new Intl.NumberFormat('ru-RU', {
+							style: 'currency',
+							currency: 'RUB',
+							minimumFractionDigits: 0,
+						}).format(1500)}
+					</h3>
 				</div>
 				<div href='?' className={styles.header__link}>
 					<svg

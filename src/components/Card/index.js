@@ -1,14 +1,25 @@
 import React from 'react';
 import styles from './Card.module.scss';
 
-function Card(props) {
-	const [isAdded, setIsAdded] = React.useState(false);
-	const [isFavor, setIsFavor] = React.useState(false);
+function Card({
+	id,
+	title,
+	image_url,
+	price,
+	added = false,
+	favorited = false,
+	OnPlus,
+	OnFavor,
+}) {
+	const [isAdded, setIsAdded] = React.useState(added);
+	const [isFavor, setIsFavor] = React.useState(favorited);
 
 	const OnclickAdd = () => {
+		OnPlus({ id, title, image_url, price });
 		setIsAdded(!isAdded);
 	};
 	const OnclickFavor = () => {
+		OnFavor({ id, title, image_url, price });
 		setIsFavor(!isFavor);
 	};
 
@@ -24,18 +35,24 @@ function Card(props) {
 			/>
 			<a href='?'>
 				<img
-					src={props.image_url}
+					src={image_url}
 					className={styles.sneakers__image}
 					alt='img sneakers'
 				/>
 			</a>
 			<div className={styles.sneakers__title}>
-				<a href='?'>{props.title}</a>
+				<a href='?'>{title}</a>
 			</div>
 			<div className={styles.block__info}>
 				<div className={styles.block__prices}>
 					<p>Цена:</p>
-					<b>{props.price}руб.</b>
+					<b>
+						{new Intl.NumberFormat('ru-RU', {
+							style: 'currency',
+							currency: 'RUB',
+							minimumFractionDigits: 0,
+						}).format(price)}
+					</b>
 				</div>
 				<img
 					onClick={OnclickAdd}
