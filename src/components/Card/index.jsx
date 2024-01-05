@@ -26,22 +26,22 @@ function Card({
 	return (
 		<li className={styles.sneakers}>
 			<img
+				onClick={OnclickFavor}
 				src={
 					isFavor ? '/img/icons/favor_active.svg' : '/img/icons/favor_def.svg'
 				}
 				className={styles.sneakers__favor}
-				onClick={OnclickFavor}
 				alt='favor_icon'
 			/>
-			<a href='?'>
+			<div>
 				<img
 					src={image_url}
 					className={styles.sneakers__image}
 					alt='img sneakers'
 				/>
-			</a>
-			<div className={styles.sneakers__title}>
-				<a href='?'>{title}</a>
+			</div>
+			<div style={{ cursor: 'pointer' }} className={styles.sneakers__title}>
+				{title}
 			</div>
 			<div className={styles.block__info}>
 				<div className={styles.block__prices}>
